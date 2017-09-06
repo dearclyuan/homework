@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+    li {
+      float: left;
+      list-style: none;
+      margin-right: 10px;
+      background-color: orange;
+      padding: 10px;
+      color: white;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+	</head>
+	<body>
+		<h2></h2>
+		<ul></ul>
+		<script>
+			var oh2  = document.querySelector('h2');
+			var oul = document.querySelector('ul');
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState === 4){
+//					oh2.innerHTML = xhr.responseText;
+					try{
+						var json = JSON.parse(xhr.responseText);
+						var data = json.data;
+						for(var i = 0; i<data.length;i++){
+							var obj = data[i];
+//							var oli = document.createElement('li');
+//							var oa = document.createElement('a');
+//							oa.innerText = obj.cat_name;
+//							oa.href = "#";
+//							oli.appendChild(oa);
+//							oul.appendChild(oli);
+							
+							oul.innerHTML+=`<li><a href="#">${obj.cat_name}</a></li>`
+						}
+						
+					}catch(error){
+						
+					}
+				}
+			}
+			xhr.open('GET','http://h6.duchengjiu.top/shop/api_cat.php')
+			xhr.send();
+		</script>
+	</body>
+</html>

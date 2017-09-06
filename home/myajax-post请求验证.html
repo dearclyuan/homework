@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+    li {
+      float: left;
+      list-style: none;
+      margin-right: 10px;
+      background-color: orange;
+      padding: 10px;
+      color: white;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+	</head>
+	<body>
+		<input type="text" />
+		<span></span>
+		<script src="myajax.js" charset="UTF-8"></script>
+		<script>
+			var oinput = document.querySelector('input');
+			var ospan = document.querySelector('span');
+			oinput.onblur = function() {
+			myajax.post('http://h6.duchengjiu.top/shop/api_cat.php',
+			{status:'check',username:oinput.value},
+			function(error,responseText){
+					var json = JSON.parse(responseText);
+					ospan.innerText = json.message;
+					ospan.style.display = 'block';
+					if(json.code ===0){
+						ospan.className = 'right';
+					}else{
+						ospan.className = 'error';
+					}
+				});
+			}
+
+		</script>
+	</body>
+</html>
