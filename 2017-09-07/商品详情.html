@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>商品详情</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				background-color: #F1F1F1;
+				margin:30px 100px;
+			}
+			h2{
+				font-size: 18px;
+				color: red;
+				margin-bottom: 20px;
+			}
+			.box{
+				width: 500px;
+				border: 1px solid darkorange;
+				background-color: floralwhite;
+			}
+			.box img{
+				width: 500px;
+				border-bottom: 3px solid orangered;
+			}
+			.goods_name {
+				width: 500px;
+				height: 70px;
+			}
+			
+			.goods_desc {
+				width: 500px;
+				height: 45px;
+				font-size: 12px;
+				color: #FFA500;
+			}
+			
+			
+			.price {
+				width: 200px;
+				height: 20px;
+				color: red;
+				font-weight: 700;
+				margin-left: 10px;
+				float: left;
+			}
+			.add{
+				width: 200px;
+				height: 20px;
+				color: red;
+				font-weight: 700;
+				margin-left: 10px;
+				float:right;
+			}
+			.box-btm{
+				width: 500px;
+				height: 30px;
+			}
+			input{
+				display: block;
+				outline: none;
+				width: 120px;
+				line-height:25px;
+				color:#fff;
+				border:1px solid orange;
+				background-color: gold;
+				border-radius: 13px;
+				margin-right: 10px;
+				margin-bottom: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="myajax.js" charset="utf-8"></script>
+		<script>
+			var goods_id = getQueryString('goods_id');
+			console.log(goods_id);
+			myajax.get('http://h6.duchengjiu.top/shop/api_goods.php', {
+				goods_id 
+			}, function(err, responseText) {
+				var json = JSON.parse(responseText);
+				var obj = json.data[0];
+				console.log(json);
+				document.body.innerHTML = `
+				<h2>${obj.goods_name}</h2>
+	      <div class="box">
+	        <div><img src="${obj.goods_thumb}"></div>
+	        <div class="goods_name">${obj.goods_name}</div>
+	        <div class="goods_desc">${obj.goods_desc}</div>
+	        <div class="box-btm">
+	        	<div class="price">\¥${obj.price}</div>
+	        	<div class="add"><input type="button" id="add-to-cart" value="添加到购物车"/></div>
+	        </div>
+	      </div>
+	      `;
+			});
+
+			//购物车功能的实现
+			document.body.onclick = function(event) {
+				event = event || window.event;
+				var target = event.target || event.srcElement;
+				if(target.id === 'add-to-cart') {
+					console.log('添加到购物车');
+					myajax.post('http://h6.duchengjiu.top/shop/api_cart.php?token=' + localStorage.token, {
+							goods_id,
+							number: 1
+						},
+						function(err, responseText) {
+							var json = JSON.parse(responseText);
+							console.log(json);
+							if(json.code === 0) {
+								alert('添加到购物车成功');
+							}
+						})
+				}
+			}
+		</script>
+	</body>
+
+</html>

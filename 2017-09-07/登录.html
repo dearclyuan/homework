@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 300px;
+				height: 300px;
+				margin: 150px auto;
+				background-color: orange;
+				border: 1px solid orangered;
+				border-radius:20px;
+			}
+			h3{
+				margin: 10px;
+				text-align: center;
+				color: #F6F6F6;
+				border-bottom: 1px solid orangered;
+			}
+			.oname{
+				width: 300px;
+				line-height: 60px;
+				border-bottom: 1px solid orangered;
+				
+			}
+			p{
+				width: 60px;
+				height: 60px;
+				float: left;
+				color: #fff;
+				text-align: center;
+				margin-right: 10px;
+			}
+			.btn{
+				width: 200px;
+				height: 30px;
+				margin: 10px 50px;
+				outline: none;
+				color: orange;
+				border-radius: 6px;
+				background-color: #C4E6F5;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<h3>用户登录</h3>
+			<div class="oname">
+				<p>用户名</p>
+				<input type="text" name="username" placeholder="请输入用户名"/>
+			</div>
+			<div class="oname">
+				<p>密 码</p>
+				<input type="password" name="password" placeholder="请输入密码"/>
+			</div>
+			<input type="submit" value="登录" class="btn"/>
+		</div>
+		<script src="myajax.js" charset="UTF-8"></script>
+		<script>
+			var ousername = document.querySelector('input[name=username]');
+			var opassword = document.querySelector('input[name=password]');
+			var osubmit = document.querySelector('input[type=submit]');
+			osubmit.onclick = function(){
+				myajax.post('http://h6.duchengjiu.top/shop/api_user.php',
+				{
+					status:'register',
+					username:ousername.value,
+					password:opassword.value
+				},function(err,responseText){
+					var json = JSON.parse(responseText);
+					console.log(json);
+				});
+			}
+		</script>
+	</body>
+</html>

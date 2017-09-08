@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		*{
+				
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background-color: #E4E4E4;
+			}
+			header{
+				width:100% ;
+				height: 40px;
+				margin: 0 auto;
+			}
+			ul{
+				width:1200px ;
+				height: 40px;
+				background-color: #F0FFFF;
+				margin: 0 auto;
+			}
+	    li {
+	      float: left;
+	      width:110px ;
+	      height: 40px;
+	      text-align: center;
+	      line-height: 40px;
+	      font-size: 20px;
+	      list-style: none;
+	      margin:0 5px 0;
+	      background-color: orangered;
+	      color: white;
+	    }
+	    li:hover{
+	    	background-color: orange;
+	    	color: #000;
+	    }
+	    a {
+	      text-decoration: none;
+	      color: #E4E4E4;
+	    }
+	    a:hover {
+	      text-decoration: underline;
+	      color: #F0FFFF;
+	    }
+	    section #Box{
+	    	width: 1350px;
+	    	height: 840px;
+	    	margin: 0 auto;
+	    }
+	    .box{
+	    	width: 258px;
+	    	height: 400px;
+	    	margin:10px 0 0 10px;
+	    	float: left;
+	    	border: 1px solid darkorange;
+	    	background-color: azure;
+	    }
+	    .goods_name{
+	    	width: 258px;
+	    	height: 70px;
+	    }
+	    .goods_name a{
+	    	color: #FFA500;
+	    }
+	    .goods_desc{
+	    	width: 258px;
+	    	height: 45px;
+	    	font-size: 12px;
+	    	color:#FFA500;
+	    }
+	    .goods_img{
+	    	width: 258px;
+	    	height: 255px;
+	    	border-bottom: 5px solid darkorange;
+	    }
+	    .price{
+	    	width: 258px;
+	    	height: 20px;
+	    	color:red;
+	    	font-weight: 700;
+	    	margin-left: 10px;
+	    }
+	    img{
+	    	width: 258px;
+	    	height: 255px;
+	    }
+	  </style>
+	</head>
+	<body>
+		<header>
+			<h2></h2>
+  		<ul></ul>
+		</header>
+		<section>
+  		<div id="Box"></div>
+  	</section>
+		<script src="myajax.js" charset="UTF-8"></script>
+		<script>
+			var oh2 = document.querySelector('h2');
+	  		var oul = document.querySelector('ul');
+	  		var odiv = document.getElementById('Box');
+	  		console.log(odiv);
+	  		myajax.get('http://h6.duchengjiu.top/shop/api_cat.php',{},function(error,responseText){
+	  			var json = JSON.parse(responseText);
+	  			var data = json.data;
+	  			for(var i=0;i<data.length;i++){
+	  				var obj = data[i];
+	  				oul.innerHTML +=`<li><a href="商品分类.html?cat_id=${obj.cat_id}">${obj.cat_name}</a></li>`;
+	  			}
+	  		})
+		
+		
+			function getQureryString(name){
+				var search = location.search.substr(1);
+				var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
+				var result = search.match(reg);
+				if(result ===null) return null;
+				return decodeURIComponent(result[2]);//decodeURIComponent() 对编码后的 URI 进行解码
+			}
+			console.log(getQureryString('cat_id'));
+			var cat_id = getQureryString('cat_id');
+			
+			myajax.get('http://h6.duchengjiu.top/shop/api_goods.php?cat_id='+cat_id,{},function(error,responseText){
+  			var json = JSON.parse(responseText);
+  			var data = json.data;
+  			for(var i=0;i<data.length;i++){
+  				var obj = data[i];
+				odiv.innerHTML +=`<div class="box">
+					<div class="goods_img"><a href="#"><img src="${obj.goods_thumb}"></a></div>
+					<div class="goods_name"><a href="#">${obj.goods_name}</a></div>
+					<div class="goods_desc">${obj.goods_desc}</div>
+					<div class="price">\¥ ${obj.price}</div>
+				</div>`;
+			  }
+  		});
+		</script>
+	</body>
+</html>
