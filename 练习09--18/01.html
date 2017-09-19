@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<script>
+			function $(selector) {
+				return new $.fn.init(selector);
+			}
+			$.fn = {
+				init: funtion(selector) {
+					if(selector === window) {
+						this[0] = window;
+						this.length = 1;
+					}else if (selector ===document) {
+						this[0] = document;
+						this.length = 1;
+					}else {
+						var elems = document.querySelectorAll(selector);
+						this.length = elems.length;
+						for(var i = 0;i < elems.length;i++) {
+							this[i] = elems[i];
+						}
+					}
+				},
+				html: function(html) {
+					for(var i =0 ;i < this.length;i++){
+						this[i].innerHTML = html;
+					}
+					return this;
+				},
+				eq: function (index) {
+					this.prevObject = this;
+					this[0] = this.prevObject[index];
+					for (var i = 1; i < this.length; i++){
+						delete this[i];
+					}
+					this.length = 1;
+					return this;
+				},
+				css: function(k, v) {
+					if(typeof k ==="string" && typeof v ==="string") {
+						for(var i=0;i<this.length;i++){
+							this[i].style[k] =  v;
+						}
+						return this;
+					}else if(typeof k ==="object") {
+						for(var i=0;i<this.length;i++) {
+							for(var prop in k) {
+								this[i].style[prop] = k[prop];
+							}
+						}
+						return this;
+					}else if (typeof k === "string" && arguments.length ===1){
+						if (window.getComputedStyle) {
+            k = k.replace(/[A-Z]/g, function(match){
+              return '-' + match.toLowerCase();
+            });
+            return window.getComputedStyle(this[0])[k]; //中括号里面可以是变量
+	          } else {
+	            k = k.replace(/-([a-z])/g, function(match, $1){
+	              return $1.toUpperCase();
+	            });
+	            return this[0].currentStyle[k];
+	          }
+					}
+				}
+			}
+			$.fn.init.prototype = $.fn;
+			$('p').html('text')
+		</script>
+	</body>
+</html>

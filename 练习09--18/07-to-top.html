@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		 <style>
+	    html, body {
+	      height: 5000px;
+	    }
+	    button {
+	      position: fixed;
+	      bottom: 10px;
+	      right: 10px;
+	      display: none;
+	    }
+	  </style>
+	</head>
+	<body>
+	  <button>to top</button>
+	  <script src="jquery-3.2.1.js"></script>
+	  <script>
+	  	$("button").click(function(){
+	  		$(window).scrollTop(0);
+	  	});
+	  	$(window).scroll(function(){
+	  		if($(window).scrollTop() > 500){
+	  			$('button').show();
+	  		} else {
+	  			$('button').hide();
+	  		}
+	  	});
+	  </script>
+	</body>
+</html>

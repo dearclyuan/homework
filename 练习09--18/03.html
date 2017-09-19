@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p></p>
+	  <p></p>
+	  <p></p>
+	  <p></p>
+	  <div id="box" class="box"></div>
+	  <script src="jquery-3.2.1.js"></script>
+	  <script>
+	  	$('p').html('jquary').css('color','skyblue').css('fontSize','30px');
+	  	$('#box').animate({"left":500,"width":300},4000,function(){
+	  		
+	  	});
+	  	$('p').mouseenter(function(){
+	  		$(this).css("background-color","red").siblings().css("background-color","blue")
+	  	});
+	  	$('p')[1].style.backgroundColor = "orange";
+	  </script>
+	</body>
+</html>
