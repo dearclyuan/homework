@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div {
+				width: 230px;;
+				height: 400px;
+				background-color: orange;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<button>slideDown</button>
+		<button>slideUp</button>
+		<button>slideToggle</button>
+		<div></div>
+		<script src="jquery-3.2.1.js"></script>
+		<script>
+			$('button:eq(0)').click(function(){
+				$('div').slideDown(1000);
+			});
+			$('button:eq(1)').click(function(){
+				$('div').slideUp(1000);
+			});
+			$('button:eq(2)').click(function(){
+				$('div').slideToggle(1000);
+			});
+		</script>
+	</body>
+</html>

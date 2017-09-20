@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div {
+				width: 160px;
+				height: 100px;
+				background-color: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<button>toggle</button>
+		<button>toggle animate</button>
+		<script src="jquery-3.2.1.js"></script>
+		<script>
+			$("button:eq(0)").click(function(){
+				$('div:first').toggle();
+			});
+			$("button:eq(1)").click(function(){
+				$('div:first').toggle(1000,function(){
+					alert("animate finish!");
+				});
+			});
+		</script>
+	</body>
+</html>

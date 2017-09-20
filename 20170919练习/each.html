@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			p{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<script src="jquery-3.2.1.js"></script>
+		<script>
+			$('p').each(function(i,item) {
+				item.style.top = 50*i + "px";
+			});
+			$('p').each(function(i,item) {
+				$(this).animate({'left':50*i},600);
+			});
+		</script>
+	</body>
+</html>

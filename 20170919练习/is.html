@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			p {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<p class="t"></p>
+		<p class="t"></p>
+		<p></p>
+		<p class="t"></p>
+		<p id="m"></p>
+		<p></p>
+		<script src="jquery-3.2.1.js"></script>
+		<script>
+			$('p:eq(4)').animate({width:500},6000);
+			$('p').click(function(){
+				console.log($(this).is('.t'));
+				console.log($(this).is('#'));
+				console.log($(this).is(':first'));
+				console.log($(this).is('animated'));
+			});
+		</script>
+	</body>
+</html>

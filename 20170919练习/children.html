@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+	    p, h3 {
+	      width: 40px;
+	      height: 40px;
+	      background-color: #ccc;
+	    }
+	  </style>
+	</head>
+	<body>
+	  <div id="box">
+	    文本
+	    <h3></h3>
+	    <h3></h3>
+	    <p></p>
+	    <p></p>
+	    <p></p>
+	    <p></p>
+	    <p></p>
+	  </div>
+	  <script src="jquery-3.2.1.js"></script>
+	  <script>
+//	  	$('#box').children("h3").css("background-color","red");
+//	  	$("#box").children(":odd").css("background-color","red");
+				console.log($('#box').children().length);
+				$("#box").children().eq(4).css("background-color","red");
+	  </script>
+	</body>
+</html>

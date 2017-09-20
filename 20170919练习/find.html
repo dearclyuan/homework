@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+			<style>
+	     p {
+	      width: 40px;
+	      height: 40px;
+	      background-color: #ccc;
+	    }
+	  </style>
+	</head>
+	<body>
+	  <div class="box">
+	    <ul>
+	      <li> <p></p> </li>
+	      <li> <p></p> </li>
+	      <li> <p></p> </li>
+	      <li> <p></p> </li>
+	      <li> <p></p> </li>
+	    </ul>
+	  </div>
+		<script src="jquery-3.2.1.js"></script>
+		<script>
+			$('.box').find('*').eq(2).css('background-color','red');
+			console.log($('.box').find("*").length);
+		</script>
+	</body>
+</html>
